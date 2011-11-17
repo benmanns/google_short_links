@@ -1,0 +1,2 @@
+module GoogleShortLinks
+end
