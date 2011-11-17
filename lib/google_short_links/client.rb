@@ -12,4 +12,12 @@ class GoogleShortLinks::Client
   def request_path action
     "http://#{server}/js/#{action}"
   end
+
+  def base_params
+    {
+      :oauth_signature_method => 'HMAC-SHA1',
+      :timestamp => Time.now.to_i.to_f,
+      :user => email,
+    }
+  end
 end
