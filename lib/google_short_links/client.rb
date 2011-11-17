@@ -1,4 +1,7 @@
 require 'cgi'
+require 'base64'
+require 'openssl'
+require 'digest/sha1'
 require 'uri'
 
 class GoogleShortLinks::Client
@@ -26,5 +29,13 @@ class GoogleShortLinks::Client
 
   def params_to_query params
     params.to_a.sort.map { |(key, value)| "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}" }.join('&')
+  end
+
+  def digest request_path, query
+    content = "GET&#{CGI.escape(request_path)}&#{CGI.escape(query)}"
+
+    digest = OpenSSL::Digest::Digest.new('sha1')
+    digest_raw = OpenSSL::HMAC.digest(digest, secret, content)
+    CGI.escape(Base64.encode64(digest_raw).chomp)
   end
 end
