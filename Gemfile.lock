@@ -33,6 +33,7 @@ PLATFORMS
 DEPENDENCIES
   httparty
   jeweler
+  multi_json
   rcov
   rdoc
   rspec
