@@ -158,4 +158,51 @@ describe GoogleShortLinks::Client do
       end
     end
   end
+
+  describe '#get_details_url' do
+    subject { GoogleShortLinks::Client.new(@options).get_details_url(@shortcut, @params) }
+
+    context 'at 2011-11-17 13:04:15 -0500' do
+      before :each do
+        @now = Time.at(1321553055)
+        Timecop.freeze(@now)
+      end
+
+      after :each do
+        Timecop.return
+      end
+
+      context 'with server a, secret b, and email c' do
+        before :each do
+          @options = { :server => 'a', :secret => 'b', :email => 'c' }
+        end
+
+        context 'with a shortcut e' do
+          before :each do
+            @shortcut = 'e'
+          end
+
+          context 'with empty params' do
+            before :each do
+              @params = {}
+            end
+
+            it 'should return a url with host a, path get_details, signature method HMAC-SHA1, shortcut e, a current timestamp, and user c, that is signed' do
+              subject.should == "http://a/js/get_details?oauth_signature_method=HMAC-SHA1&shortcut=e&timestamp=#{Time.now.to_f}&user=c&oauth_signature=4uyxm8VBpvqEjoorn9Z60OhNsr8%3D"
+            end
+          end
+
+          context 'with params oauth_signature_method HMAC-MD5, blah 123' do
+            before :each do
+              @params = { :oauth_signature_method => 'HMAC-MD5', :blah => 123 }
+            end
+
+            it 'should return a url with host a, path get_details, signature method HMAC-MD5, shortcut e, a current timestamp, user c, and extra parameter blah 123, that is signed' do
+              subject.should == "http://a/js/get_details?blah=123&oauth_signature_method=HMAC-MD5&shortcut=e&timestamp=#{Time.now.to_f}&user=c&oauth_signature=iXvjBSxA87X45ShYk4JRb7W%2BcOw%3D"
+            end
+          end
+        end
+      end
+    end
+  end
 end

@@ -29,6 +29,14 @@ class GoogleShortLinks::Client
     digest_url(request_path, query)
   end
 
+  def get_details_url shortcut, params={}
+    request_path = request_path(:get_details)
+
+    query = params_to_query(base_params.merge(:shortcut => shortcut).merge(params))
+
+    digest_url(request_path, query)
+  end
+
   protected
 
   def request_path action
