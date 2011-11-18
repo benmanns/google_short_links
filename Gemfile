@@ -1,5 +1,7 @@
 source :rubygems
 
+gem 'httparty'
+
 group :development do
   gem 'jeweler'
   gem 'rcov'
