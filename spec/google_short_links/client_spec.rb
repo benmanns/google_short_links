@@ -1,6 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
 describe GoogleShortLinks::Client do
+  subject { GoogleShortLinks::Client }
+
+  it { should <= HTTParty }
+
   describe '#initialize' do
     subject { GoogleShortLinks::Client.new @params }
 

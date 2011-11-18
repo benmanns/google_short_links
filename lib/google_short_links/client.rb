@@ -4,7 +4,11 @@ require 'digest/sha1'
 require 'openssl'
 require 'uri'
 
+require 'httparty'
+
 class GoogleShortLinks::Client
+  include HTTParty
+
   attr_accessor :server, :secret, :email
 
   def initialize options={}
