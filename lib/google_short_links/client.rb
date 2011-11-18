@@ -36,7 +36,7 @@ class GoogleShortLinks::Client
   end
 
   def params_to_query params
-    params.to_a.sort.map { |(key, value)| "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}" }.join('&')
+    params.to_a.sort_by { |param| param.to_s }.map { |(key, value)| "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}" }.join('&')
   end
 
   def digest request_path, query
