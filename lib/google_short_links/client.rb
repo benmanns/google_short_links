@@ -47,6 +47,10 @@ class GoogleShortLinks::Client
     self.class.get(get_or_create_hash_url(url, params)).parsed_response
   end
 
+  def get_or_create_shortlink url, shortcut, params={}
+    self.class.get(get_or_create_shortlink_url(url, shortcut, params)).parsed_response
+  end
+
   protected
 
   def request_path action
