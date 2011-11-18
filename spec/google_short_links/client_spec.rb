@@ -209,4 +209,29 @@ describe GoogleShortLinks::Client do
       end
     end
   end
+
+  describe '#get_or_create_hash' do
+    let(:client) { GoogleShortLinks::Client.new }
+
+    subject { client.get_or_create_hash(nil) }
+
+    context 'with get_or_create_hash_url returning http://www.example.org/' do
+      before :each do
+        client.stub!(:get_or_create_hash_url).and_return('http://www.example.org/')
+      end
+
+      it 'should call get with http://www.example.org/' do
+        GoogleShortLinks::Client.should_receive(:get).with('http://www.example.org/').and_return(mock(:parsed_response => nil))
+        subject
+      end
+
+      context 'when get returns a parsed response { "a" => "b" }' do
+        before :each do
+          GoogleShortLinks::Client.stub!(:get).with('http://www.example.org/').and_return(mock(:parsed_response => { 'a' => 'b'}))
+        end
+
+        it { should == { 'a' => 'b' } }
+      end
+    end
+  end
 end

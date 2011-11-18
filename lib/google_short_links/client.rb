@@ -43,6 +43,10 @@ class GoogleShortLinks::Client
     digest_url(request_path, query)
   end
 
+  def get_or_create_hash url, params={}
+    self.class.get(get_or_create_hash_url(url, params)).parsed_response
+  end
+
   protected
 
   def request_path action
