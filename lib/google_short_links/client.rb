@@ -38,4 +38,10 @@ class GoogleShortLinks::Client
     digest_raw = OpenSSL::HMAC.digest(digest, secret, content)
     CGI.escape(Base64.encode64(digest_raw).chomp)
   end
+
+  def digest_url request_path, query
+    request_uri = URI.parse(request_path)
+    request_uri.query = "#{query}&oauth_signature=#{digest(request_path, query)}"
+    request_uri.to_s
+  end
 end
