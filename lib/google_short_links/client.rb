@@ -13,6 +13,14 @@ class GoogleShortLinks::Client
     self.email = options[:email]
   end
 
+  def get_or_create_hash_url url, params={}
+    request_path = request_path(:get_or_create_hash)
+
+    query = params_to_query(base_params.merge(:url => url).merge(params))
+
+    digest_url(request_path, query)
+  end
+
   protected
 
   def request_path action
