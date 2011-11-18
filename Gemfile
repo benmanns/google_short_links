@@ -5,4 +5,5 @@ group :development do
   gem 'rcov'
   gem 'rdoc'
   gem 'rspec'
+  gem 'timecop'
 end
