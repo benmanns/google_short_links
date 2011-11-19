@@ -40,7 +40,7 @@ RDoc::Task.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "cleverbot #{version}"
+  rdoc.title = "google-short-links #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include(File.join('lib', '**', '*.rb'))
 end
