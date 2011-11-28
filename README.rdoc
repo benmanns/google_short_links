@@ -2,6 +2,15 @@
 
 Ruby wrapper for Google Short Links.
 
+== Examples
+
+This example creates a new client, creates a hash
+
+   client = GoogleShortLinks::Client.new :server => 'short.example.com', :secret => 'abcdef1234567890', :email => 'ben@example.com'
+   link = client.get_or_create_hash 'http://example.com/parent/child/long_document_name.html', :is_public => true
+   link # => {"status"=>"ok", "url"=>"http://example.com/parent/child/long_document_name.html", "estimated_api_calls_remaining"=>98, "shortcut"=>"abc12", "usage_count"=>0, "owner"=>"ben@example.com", "is_public"=>true, "is_hash"=>true}
+   short_url = "http://short.example.com/#{link['shortcut']}" # => "http://short.example.com/abc12"
+
 == Contributing to google-short-links
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
