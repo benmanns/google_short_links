@@ -2,6 +2,20 @@
 
 Ruby wrapper for Google Short Links.
 
+== Installation
+
+To install Google Short Links, run
+
+    gem install google-short-links
+
+To load the library, use 
+
+    require 'google_short_links'
+
+Or, with Bundler, add to your Gemfile
+
+    gem 'google-short-links', :require => 'google_short_links'
+
 == Examples
 
 This example creates a new client, creates a hash
