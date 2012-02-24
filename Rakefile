@@ -12,8 +12,8 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'google-short-links'
-  gem.homepage = 'https://github.com/benmanns/google-short-links'
+  gem.name = 'google_short_links'
+  gem.homepage = 'https://github.com/benmanns/google_short_links'
   gem.license = 'MIT'
   gem.summary = 'Ruby wrapper for Google Short Links.'
   gem.description = 'Ruby wrapper for Google Short Links.'
@@ -40,7 +40,7 @@ RDoc::Task.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "google-short-links #{version}"
+  rdoc.title = "google_short_links #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include(File.join('lib', '**', '*.rb'))
 end
